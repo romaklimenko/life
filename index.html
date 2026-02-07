@@ -21,17 +21,6 @@
       </header>
 
       <main class="config-container">
-        <!-- Preset selector -->
-        <div class="preset-section">
-          <label for="preset-select" class="label">Preset</label>
-          <select id="preset-select" class="select">
-            <option value="balanced">Balanced (Stable Ecosystem)</option>
-            <option value="predator-paradise">Predator Paradise (More Wolves)</option>
-            <option value="peaceful-meadow">Peaceful Meadow (Endangered Wolves)</option>
-            <option value="survival-mode">Survival Mode (Ultimate Challenge)</option>
-          </select>
-        </div>
-
         <!-- Parameter groups -->
         <div class="param-grid">
           <!-- Grass parameters -->
@@ -96,12 +85,31 @@
               <input type="number" id="wolf-hunting" value="5" min="1" max="20" class="input" />
             </div>
           </fieldset>
-        </div>
 
-        <!-- Game speed -->
-        <div class="speed-section glass">
-          <label for="game-speed" class="label">Game Speed: <span id="speed-value">10</span> ticks/sec</label>
-          <input type="range" id="game-speed" min="1" max="60" value="10" class="slider" />
+          <!-- Settings group -->
+          <fieldset class="param-group glass settings-group">
+            <legend class="param-legend">⚙️ Settings</legend>
+
+            <!-- Preset selector -->
+            <div class="settings-item">
+              <label for="preset-select" class="settings-label">Preset</label>
+              <select id="preset-select" class="select">
+                <option value="balanced">Balanced</option>
+                <option value="predator-paradise">Predator Paradise</option>
+                <option value="peaceful-meadow">Peaceful Meadow</option>
+                <option value="survival-mode">Survival Mode</option>
+              </select>
+            </div>
+
+            <!-- Game speed -->
+            <div class="settings-item">
+              <label for="game-speed" class="settings-label">
+                Game Speed<br />
+                <span id="speed-value">10</span> ticks/sec
+              </label>
+              <input type="range" id="game-speed" min="1" max="60" value="10" class="slider" />
+            </div>
+          </fieldset>
         </div>
 
         <button id="start-btn" class="btn btn-primary">Start Simulation</button>

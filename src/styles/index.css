@@ -170,7 +170,7 @@ body {
   flex-direction: column;
   align-items: center;
   padding: 0 var(--space-lg) var(--space-2xl);
-  max-width: 900px;
+  max-width: 1600px;
   margin: 0 auto;
   width: 100%;
 }
@@ -212,7 +212,7 @@ body {
 /* --- Parameter Grid --- */
 .param-grid {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+  grid-template-columns: repeat(4, minmax(280px, 1fr));
   gap: var(--space-lg);
   width: 100%;
   margin-bottom: var(--space-xl);
@@ -221,6 +221,7 @@ body {
 .param-group {
   padding: var(--space-lg);
   border: none;
+  min-width: 0; /* Allow content to shrink if needed */
 }
 
 .param-legend {
@@ -274,6 +275,36 @@ body {
 
 .input[type="number"] {
   -moz-appearance: textfield;
+}
+
+/* --- Settings Group --- */
+.settings-group {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-lg);
+}
+
+.settings-item {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-sm);
+  margin-bottom: var(--space-md);
+}
+
+.settings-item:last-child {
+  margin-bottom: 0;
+}
+
+.settings-label {
+  font-size: var(--font-size-sm);
+  color: var(--color-text-secondary);
+  font-weight: 500;
+  line-height: 1.4;
+}
+
+.settings-item .select {
+  width: 100%;
+  min-width: 0;
 }
 
 /* --- Speed Section --- */
@@ -551,6 +582,12 @@ body {
 }
 
 /* --- Responsive Design --- */
+@media (max-width: 1400px) {
+  .param-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
 @media (max-width: 900px) {
   .simulation-layout {
     flex-direction: column;
@@ -569,6 +606,10 @@ body {
     width: min(90vw, 400px);
     height: min(90vw, 400px);
   }
+
+  .param-grid {
+    grid-template-columns: 1fr;
+  }
 }
 
 @media (max-width: 600px) {
@@ -578,10 +619,6 @@ body {
 
   .title {
     font-size: var(--font-size-3xl);
-  }
-
-  .param-grid {
-    grid-template-columns: 1fr;
   }
 
   .config-container {
