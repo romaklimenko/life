@@ -32,14 +32,14 @@ export const COLOR_EMPTY: RGBA = { r: 15, g: 15, b: 25, a: 255 };
 export const COLOR_GRASS: RGBA = { r: 74, g: 222, b: 128, a: 255 };
 
 /**
- * Sheep color - warm cream/white.
+ * Sheep color - white/off-white.
  */
-export const COLOR_SHEEP: RGBA = { r: 254, g: 243, b: 199, a: 255 };
+export const COLOR_SHEEP: RGBA = { r: 245, g: 245, b: 240, a: 255 };
 
 /**
- * Wolf color - dark gray with slight blue tint.
+ * Wolf color - medium gray.
  */
-export const COLOR_WOLF: RGBA = { r: 75, g: 85, b: 99, a: 255 };
+export const COLOR_WOLF: RGBA = { r: 160, g: 160, b: 160, a: 255 };
 
 /**
  * Entity color lookup array for fast access.
@@ -68,16 +68,16 @@ export function getEntityColor(type: EntityType): RGBA {
 export const CSS_COLORS = {
     empty: 'rgb(15, 15, 25)',
     grass: 'rgb(74, 222, 128)',
-    sheep: 'rgb(254, 243, 199)',
-    wolf: 'rgb(75, 85, 99)',
+    sheep: 'rgb(245, 245, 240)',
+    wolf: 'rgb(160, 160, 160)',
 
     // Chart line colors with transparency for stacking
     grassLine: 'rgba(74, 222, 128, 0.9)',
-    sheepLine: 'rgba(254, 243, 199, 0.9)',
-    wolfLine: 'rgba(200, 200, 220, 0.9)',
+    sheepLine: 'rgba(245, 245, 240, 0.9)',
+    wolfLine: 'rgba(160, 160, 160, 0.9)',
 
     // Fill colors for chart area
     grassFill: 'rgba(74, 222, 128, 0.2)',
-    sheepFill: 'rgba(254, 243, 199, 0.2)',
-    wolfFill: 'rgba(200, 200, 220, 0.2)',
+    sheepFill: 'rgba(245, 245, 240, 0.2)',
+    wolfFill: 'rgba(160, 160, 160, 0.2)',
 };

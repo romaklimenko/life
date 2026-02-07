@@ -30,10 +30,10 @@
   /* Entity colors */
   --color-grass: #4ade80;
   --color-grass-dark: #16a34a;
-  --color-sheep: #fef3c7;
-  --color-sheep-dark: #fcd34d;
-  --color-wolf: #6b7280;
-  --color-wolf-dark: #374151;
+  --color-sheep: #f5f5f0;
+  --color-sheep-dark: #e8e8e0;
+  --color-wolf: #a0a0a0;
+  --color-wolf-dark: #787878;
 
   /* Spacing */
   --space-xs: 0.25rem;
