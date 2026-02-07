@@ -9,7 +9,7 @@
  */
 
 import { SimulationConfig } from '../types';
-import { getPresetConfig, PresetId, PRESETS, DEFAULT_CONFIG } from '../config/defaults';
+import { getPresetConfig, PresetId } from '../config/defaults';
 import { sanitizeConfig } from '../config/validation';
 
 // ============================================================================
@@ -260,6 +260,43 @@ export class SimulationControls {
     reset(): void {
         this.isPaused = false;
         this.updatePauseButton();
+        this.hideGameOver();
+    }
+
+    /**
+     * Shows the game over message with extinction details.
+     */
+    showGameOver(extinctPopulation: 'grass' | 'sheep' | 'wolves' | null, finalTick: number): void {
+        const gameOverEl = document.getElementById('game-over-message');
+        if (!gameOverEl) return;
+
+        const emoji = extinctPopulation === 'grass' ? '🌱' :
+            extinctPopulation === 'sheep' ? '🐑' : '🐺';
+        const name = extinctPopulation || 'unknown';
+
+        gameOverEl.innerHTML = `
+            <div class="game-over-content">
+                <h2>🎮 Game Over!</h2>
+                <p>${emoji} <strong>${name.charAt(0).toUpperCase() + name.slice(1)}</strong> went extinct!</p>
+                <p>You survived <strong>${finalTick.toLocaleString()}</strong> ticks</p>
+            </div>
+        `;
+        gameOverEl.classList.remove('hidden');
+
+        // Update pause button to show game is over
+        this.pauseBtn.textContent = '💀 Ended';
+        this.pauseBtn.disabled = true;
+    }
+
+    /**
+     * Hides the game over message.
+     */
+    hideGameOver(): void {
+        const gameOverEl = document.getElementById('game-over-message');
+        if (gameOverEl) {
+            gameOverEl.classList.add('hidden');
+        }
+        this.pauseBtn.disabled = false;
     }
 }
 

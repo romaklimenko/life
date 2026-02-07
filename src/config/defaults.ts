@@ -13,40 +13,44 @@ import { SimulationConfig, GrassConfig, SheepConfig, WolfConfig } from '../types
 
 /**
  * Default grass configuration.
- * Grass lives moderately long and spreads slowly.
+ * Based on ecological models: grass regrows relatively quickly.
+ * lifeExpectancy affects how long individual grass patches persist.
  */
 export const DEFAULT_GRASS_CONFIG: GrassConfig = {
-    lifeExpectancy: 50,
-    initialCount: 5000,
-    spreadRate: 5,
+    lifeExpectancy: 60,     // ~60 ticks before natural death
+    initialCount: 6000,     // ~36% of grid covered initially
+    spreadRate: 6,          // 1/6 chance to spread each tick
 };
 
 /**
  * Default sheep configuration.
- * Sheep live longer than grass, need regular food.
+ * Based on prey dynamics: moderate reproduction, vulnerable to starvation.
+ * Sheep ratio to wolves should be roughly 10:1 for stability.
  */
 export const DEFAULT_SHEEP_CONFIG: SheepConfig = {
-    lifeExpectancy: 100,
-    initialCount: 500,
-    starvationTime: 20,
-    breedThreshold: 3,
+    lifeExpectancy: 120,    // Long natural lifespan if well-fed
+    initialCount: 400,      // ~8% of grid, 8:1 ratio to wolves
+    starvationTime: 25,     // Dies after 25 ticks without grass
+    breedThreshold: 4,      // Needs to eat 4 grass to reproduce
 };
 
 /**
  * Default wolf configuration.
- * Wolves are apex predators with longer lifespans.
+ * Based on predator dynamics: fewer individuals, slower reproduction.
+ * Wolves need successful hunts to survive and breed.
  */
 export const DEFAULT_WOLF_CONFIG: WolfConfig = {
-    lifeExpectancy: 150,
-    initialCount: 50,
-    starvationTime: 30,
-    breedThreshold: 2,
-    huntingRadius: 5,
+    lifeExpectancy: 150,    // Longer lifespan than sheep
+    initialCount: 50,       // ~1% of grid, apex predator density
+    starvationTime: 35,     // Longer survival between meals
+    breedThreshold: 3,      // Needs to eat 3 sheep to reproduce
+    huntingRadius: 5,       // Detection range for prey
 };
 
 /**
  * Default simulation configuration.
- * Balanced ecosystem with moderate game speed.
+ * Values tuned for stable oscillating populations based on
+ * Lotka-Volterra predator-prey dynamics.
  */
 export const DEFAULT_CONFIG: SimulationConfig = {
     grass: DEFAULT_GRASS_CONFIG,
@@ -86,92 +90,95 @@ export const BALANCED_PRESET: Preset = {
 
 /**
  * Predator Paradise - More wolves with larger hunting radius.
- * High predator pressure leads to dynamic population swings.
+ * Based on predator-prey dynamics with higher predator density.
+ * Features oscillating populations with dramatic swings.
  */
 export const PREDATOR_PARADISE_PRESET: Preset = {
     id: 'predator-paradise',
     name: 'Predator Paradise',
-    description: 'More wolves, larger hunting radius',
+    description: 'More wolves, dramatic population swings',
     config: {
         grass: {
-            lifeExpectancy: 40,
-            initialCount: 6000,
-            spreadRate: 8,
+            lifeExpectancy: 60,     // Longer-lived grass
+            initialCount: 7000,     // More grass to support food chain
+            spreadRate: 8,          // Faster regrowth
         },
         sheep: {
-            lifeExpectancy: 80,
-            initialCount: 800,
-            starvationTime: 25,
-            breedThreshold: 2,
+            lifeExpectancy: 100,
+            initialCount: 600,      // More sheep to feed wolves
+            starvationTime: 25,     // More resilient
+            breedThreshold: 4,      // Faster breeding to survive predation
         },
         wolf: {
-            lifeExpectancy: 200,
-            initialCount: 150,
-            starvationTime: 40,
-            breedThreshold: 1,
-            huntingRadius: 8,
+            lifeExpectancy: 180,
+            initialCount: 80,       // More wolves but balanced
+            starvationTime: 35,     // Longer survival between meals
+            breedThreshold: 3,      // Slower breeding than sheep
+            huntingRadius: 6,       // Good hunting range
         },
         gameSpeed: 10,
     },
 };
 
 /**
- * Peaceful Meadow - No wolves, plenty of grass.
- * Watch sheep population boom and potentially crash.
+ * Peaceful Meadow - Minimal wolf presence.
+ * The challenge: keep wolves alive long enough to breed!
+ * Too few wolves = immediate game over.
  */
 export const PEACEFUL_MEADOW_PRESET: Preset = {
     id: 'peaceful-meadow',
     name: 'Peaceful Meadow',
-    description: 'No wolves, lots of grass',
+    description: 'Few wolves, abundant sheep - keep wolves alive!',
     config: {
         grass: {
-            lifeExpectancy: 80,
-            initialCount: 8000,
-            spreadRate: 10,
+            lifeExpectancy: 80,     // Long-lived grass
+            initialCount: 8000,     // Abundant food
+            spreadRate: 10,         // Fast regrowth
         },
         sheep: {
-            lifeExpectancy: 120,
-            initialCount: 200,
-            starvationTime: 30,
-            breedThreshold: 2,
+            lifeExpectancy: 150,
+            initialCount: 800,      // Lots of prey
+            starvationTime: 40,     // Rarely starve
+            breedThreshold: 3,      // Fast breeding
         },
         wolf: {
-            lifeExpectancy: 100,
-            initialCount: 0, // No wolves!
-            starvationTime: 20,
-            breedThreshold: 2,
-            huntingRadius: 5,
+            lifeExpectancy: 200,
+            initialCount: 10,       // Very few wolves - endangered!
+            starvationTime: 50,     // Long survival to help them
+            breedThreshold: 2,      // Easy breeding
+            huntingRadius: 8,       // Large hunting range
         },
         gameSpeed: 10,
     },
 };
 
 /**
- * Survival Mode - Scarce resources, fast deaths.
- * Challenging environment where populations struggle.
+ * Survival Mode - Harsh conditions, scarce resources.
+ * Based on stressed ecosystem dynamics.
+ * High risk of extinction - the ultimate challenge!
  */
 export const SURVIVAL_MODE_PRESET: Preset = {
     id: 'survival-mode',
     name: 'Survival Mode',
-    description: 'Scarce resources, fast deaths',
+    description: 'Scarce resources, high mortality - ultimate challenge',
     config: {
         grass: {
-            lifeExpectancy: 30,
-            initialCount: 2000,
-            spreadRate: 2,
+            lifeExpectancy: 35,     // Short-lived grass
+            initialCount: 3000,     // Less initial coverage
+            spreadRate: 4,          // Slow regrowth
         },
         sheep: {
-            lifeExpectancy: 60,
-            initialCount: 300,
-            starvationTime: 10,
-            breedThreshold: 5,
+            lifeExpectancy: 70,     // Shorter lifespan
+            initialCount: 250,      // Fewer sheep
+            starvationTime: 15,     // Quick starvation
+            breedThreshold: 5,      // Hard to reproduce
         },
         wolf: {
-            lifeExpectancy: 80,
-            initialCount: 80,
-            starvationTime: 15,
-            breedThreshold: 3,
-            huntingRadius: 7,
+            lifeExpectancy: 100,
+            initialCount: 40,       // Balanced predator count
+            starvationTime: 20,     // Quick starvation too
+            breedThreshold: 4,      // Harder to breed
+            huntingRadius: 6,       // Moderate hunting range
         },
         gameSpeed: 10,
     },

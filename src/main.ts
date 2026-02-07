@@ -63,6 +63,12 @@ function gameLoop(timestamp: number): void {
         // Update displays
         const counts = engine.getPopulationCounts();
         controls.updateStats(counts.grass, counts.sheep, counts.wolves, engine.getTick());
+
+        // Check for game over (extinction)
+        if (engine.hasEnded()) {
+            const extinct = engine.getExtinctPopulation();
+            controls.showGameOver(extinct, engine.getTick());
+        }
     }
 
     // Always render (even when paused)

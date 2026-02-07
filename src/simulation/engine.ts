@@ -21,7 +21,6 @@ import {
     updateSheep,
     updateWolf,
     seedPopulation,
-    createGrass,
 } from './entities';
 
 /** Maximum history points to keep for charting */
@@ -49,6 +48,12 @@ export class SimulationEngine {
     /** Current simulation state */
     private state: SimulationState;
 
+    /** Whether the simulation has ended due to extinction */
+    private isGameOver = false;
+
+    /** Which population went extinct (if any) */
+    private extinctPopulation: 'grass' | 'sheep' | 'wolves' | null = null;
+
     /**
      * Creates a new simulation engine.
      * @param config - Initial configuration
@@ -73,6 +78,8 @@ export class SimulationEngine {
      * Seeds the grid with initial populations.
      */
     initialize(): void {
+        this.isGameOver = false;
+        this.extinctPopulation = null;
         seedPopulation(this.grid, this.config);
         this.state.tick = 0;
         this.state.history = [];
@@ -288,10 +295,48 @@ export class SimulationEngine {
         // Update population counts
         this.updatePopulationCounts();
 
+        // Check for extinction - game ends if any population reaches zero
+        this.checkExtinction();
+
         // Record history periodically
         if (this.state.tick % HISTORY_INTERVAL === 0) {
             this.recordHistory();
         }
+    }
+
+    /**
+     * Checks if any population has gone extinct and ends the game if so.
+     */
+    private checkExtinction(): void {
+        const { grass, sheep, wolves } = this.state.population;
+
+        if (grass === 0) {
+            this.isGameOver = true;
+            this.extinctPopulation = 'grass';
+            this.state.isRunning = false;
+        } else if (sheep === 0) {
+            this.isGameOver = true;
+            this.extinctPopulation = 'sheep';
+            this.state.isRunning = false;
+        } else if (wolves === 0) {
+            this.isGameOver = true;
+            this.extinctPopulation = 'wolves';
+            this.state.isRunning = false;
+        }
+    }
+
+    /**
+     * Returns whether the simulation has ended due to extinction.
+     */
+    hasEnded(): boolean {
+        return this.isGameOver;
+    }
+
+    /**
+     * Returns which population went extinct, or null if still running.
+     */
+    getExtinctPopulation(): 'grass' | 'sheep' | 'wolves' | null {
+        return this.extinctPopulation;
     }
 
     // ==========================================================================
