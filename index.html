@@ -1,0 +1,161 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="description" content="Life - An ecosystem simulation with grass, sheep, and wolves" />
+    <title>Life - Ecosystem Simulation</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+  </head>
+  <body>
+    <div id="app">
+      <!-- Start Screen -->
+      <div id="start-screen" class="screen">
+        <header class="header">
+          <h1 class="title">🌿 Life</h1>
+          <p class="subtitle">Ecosystem Simulation</p>
+        </header>
+        
+        <main class="config-container">
+          <!-- Preset selector -->
+          <div class="preset-section">
+            <label for="preset-select" class="label">Preset</label>
+            <select id="preset-select" class="select">
+              <option value="balanced">Balanced</option>
+              <option value="predator-paradise">Predator Paradise</option>
+              <option value="peaceful-meadow">Peaceful Meadow</option>
+              <option value="survival-mode">Survival Mode</option>
+            </select>
+          </div>
+
+          <!-- Parameter groups -->
+          <div class="param-grid">
+            <!-- Grass parameters -->
+            <fieldset class="param-group glass">
+              <legend class="param-legend">🌱 Grass</legend>
+              <div class="param-row">
+                <label for="grass-lifespan">Life expectancy</label>
+                <input type="number" id="grass-lifespan" value="50" min="1" max="500" class="input" />
+              </div>
+              <div class="param-row">
+                <label for="grass-initial">Initial count</label>
+                <input type="number" id="grass-initial" value="5000" min="0" max="50000" class="input" />
+              </div>
+              <div class="param-row">
+                <label for="grass-spread">Spread rate</label>
+                <input type="number" id="grass-spread" value="5" min="1" max="100" class="input" />
+              </div>
+            </fieldset>
+
+            <!-- Sheep parameters -->
+            <fieldset class="param-group glass">
+              <legend class="param-legend">🐑 Sheep</legend>
+              <div class="param-row">
+                <label for="sheep-lifespan">Life expectancy</label>
+                <input type="number" id="sheep-lifespan" value="100" min="1" max="500" class="input" />
+              </div>
+              <div class="param-row">
+                <label for="sheep-initial">Initial count</label>
+                <input type="number" id="sheep-initial" value="500" min="0" max="5000" class="input" />
+              </div>
+              <div class="param-row">
+                <label for="sheep-starvation">Starvation time</label>
+                <input type="number" id="sheep-starvation" value="20" min="1" max="100" class="input" />
+              </div>
+              <div class="param-row">
+                <label for="sheep-breed">Breed threshold</label>
+                <input type="number" id="sheep-breed" value="3" min="1" max="20" class="input" />
+              </div>
+            </fieldset>
+
+            <!-- Wolf parameters -->
+            <fieldset class="param-group glass">
+              <legend class="param-legend">🐺 Wolves</legend>
+              <div class="param-row">
+                <label for="wolf-lifespan">Life expectancy</label>
+                <input type="number" id="wolf-lifespan" value="150" min="1" max="500" class="input" />
+              </div>
+              <div class="param-row">
+                <label for="wolf-initial">Initial count</label>
+                <input type="number" id="wolf-initial" value="50" min="0" max="1000" class="input" />
+              </div>
+              <div class="param-row">
+                <label for="wolf-starvation">Starvation time</label>
+                <input type="number" id="wolf-starvation" value="30" min="1" max="100" class="input" />
+              </div>
+              <div class="param-row">
+                <label for="wolf-breed">Breed threshold</label>
+                <input type="number" id="wolf-breed" value="2" min="1" max="10" class="input" />
+              </div>
+              <div class="param-row">
+                <label for="wolf-hunting">Hunting radius</label>
+                <input type="number" id="wolf-hunting" value="5" min="1" max="20" class="input" />
+              </div>
+            </fieldset>
+          </div>
+
+          <!-- Game speed -->
+          <div class="speed-section glass">
+            <label for="game-speed" class="label">Game Speed: <span id="speed-value">10</span> ticks/sec</label>
+            <input type="range" id="game-speed" min="1" max="60" value="10" class="slider" />
+          </div>
+
+          <button id="start-btn" class="btn btn-primary">Start Simulation</button>
+        </main>
+      </div>
+
+      <!-- Simulation Screen -->
+      <div id="simulation-screen" class="screen hidden">
+        <div class="simulation-layout">
+          <!-- Grid section -->
+          <section class="grid-section">
+            <canvas id="grid-canvas" width="255" height="255"></canvas>
+          </section>
+
+          <!-- Controls and chart section -->
+          <aside class="sidebar glass">
+            <div class="controls">
+              <button id="pause-btn" class="btn btn-secondary">⏸ Pause</button>
+              <button id="reset-btn" class="btn btn-danger">↺ Reset</button>
+            </div>
+
+            <div class="speed-control">
+              <label for="sim-speed" class="label">Speed: <span id="sim-speed-value">10</span> ticks/sec</label>
+              <input type="range" id="sim-speed" min="1" max="60" value="10" class="slider" />
+            </div>
+
+            <div class="stats">
+              <div class="stat stat-grass">
+                <span class="stat-icon">🌱</span>
+                <span class="stat-label">Grass</span>
+                <span id="grass-count" class="stat-value">0</span>
+              </div>
+              <div class="stat stat-sheep">
+                <span class="stat-icon">🐑</span>
+                <span class="stat-label">Sheep</span>
+                <span id="sheep-count" class="stat-value">0</span>
+              </div>
+              <div class="stat stat-wolf">
+                <span class="stat-icon">🐺</span>
+                <span class="stat-label">Wolves</span>
+                <span id="wolf-count" class="stat-value">0</span>
+              </div>
+            </div>
+
+            <div class="chart-container">
+              <h3 class="chart-title">Population History</h3>
+              <canvas id="chart-canvas" width="300" height="150"></canvas>
+            </div>
+
+            <div class="tick-counter">
+              Tick: <span id="tick-count">0</span>
+            </div>
+          </aside>
+        </div>
+      </div>
+    </div>
+    <script type="module" src="/src/main.ts"></script>
+  </body>
+</html>
