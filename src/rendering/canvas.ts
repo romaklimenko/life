@@ -7,7 +7,7 @@
 
 import { EntityType, GRID_WIDTH, GRID_HEIGHT, GRID_SIZE } from '../types';
 import { Grid } from '../simulation/grid';
-import { ENTITY_COLORS, RGBA } from './colors';
+import { ENTITY_COLORS } from './colors';
 
 /**
  * Renderer handles drawing the simulation grid to a canvas.

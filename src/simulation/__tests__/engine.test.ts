@@ -6,7 +6,7 @@
 
 import { describe, it, expect, beforeEach } from 'vitest';
 import { SimulationEngine } from '../engine';
-import { SimulationConfig, EntityType } from '../../types';
+import { SimulationConfig } from '../../types';
 
 const testConfig: SimulationConfig = {
     grass: {

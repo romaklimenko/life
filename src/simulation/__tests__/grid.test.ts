@@ -10,7 +10,7 @@
 
 import { describe, it, expect, beforeEach } from 'vitest';
 import { Grid } from '../grid';
-import { EntityType, GrassEntity, SheepEntity, WolfEntity, GRID_WIDTH, GRID_HEIGHT } from '../../types';
+import { EntityType, GrassEntity, SheepEntity, WolfEntity } from '../../types';
 
 describe('Grid', () => {
     let grid: Grid;

@@ -16,8 +16,6 @@ import {
     SheepEntity,
     WolfEntity,
     SimulationConfig,
-    GRID_WIDTH,
-    GRID_HEIGHT,
 } from '../types';
 import { Grid } from './grid';
 

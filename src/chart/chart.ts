@@ -187,7 +187,7 @@ export class PopulationChart {
     /**
      * Draws the legend.
      */
-    private drawLegend(canvasWidth: number): void {
+    private drawLegend(_canvasWidth: number): void {
         const ctx = this.ctx;
         const legendY = this.canvas.height - 10;
         const items = [

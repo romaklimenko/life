@@ -9,13 +9,9 @@
 import {
     EntityType,
     Entity,
-    GrassEntity,
-    SheepEntity,
-    WolfEntity,
     GRID_WIDTH,
     GRID_HEIGHT,
     GRID_SIZE,
-    Direction,
     DIRECTIONS,
     CARDINAL_DIRECTIONS,
 } from '../types';
