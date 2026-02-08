@@ -40,6 +40,7 @@ export class StartScreenController {
     private grassLifespan: HTMLInputElement;
     private grassInitial: HTMLInputElement;
     private grassSpread: HTMLInputElement;
+    private grassSpreadRadius: HTMLInputElement;
     private sheepLifespan: HTMLInputElement;
     private sheepInitial: HTMLInputElement;
     private sheepStarvation: HTMLInputElement;
@@ -68,6 +69,7 @@ export class StartScreenController {
         this.grassLifespan = getElement<HTMLInputElement>('grass-lifespan');
         this.grassInitial = getElement<HTMLInputElement>('grass-initial');
         this.grassSpread = getElement<HTMLInputElement>('grass-spread');
+        this.grassSpreadRadius = getElement<HTMLInputElement>('grass-spread-radius');
         this.sheepLifespan = getElement<HTMLInputElement>('sheep-lifespan');
         this.sheepInitial = getElement<HTMLInputElement>('sheep-initial');
         this.sheepStarvation = getElement<HTMLInputElement>('sheep-starvation');
@@ -122,6 +124,7 @@ export class StartScreenController {
         this.grassLifespan.value = config.grass.lifeExpectancy.toString();
         this.grassInitial.value = config.grass.initialCount.toString();
         this.grassSpread.value = config.grass.spreadRate.toString();
+        this.grassSpreadRadius.value = config.grass.spreadRadius.toString();
         this.sheepLifespan.value = config.sheep.lifeExpectancy.toString();
         this.sheepInitial.value = config.sheep.initialCount.toString();
         this.sheepStarvation.value = config.sheep.starvationTime.toString();
@@ -145,6 +148,7 @@ export class StartScreenController {
                 lifeExpectancy: parseInt(this.grassLifespan.value, 10),
                 initialCount: parseInt(this.grassInitial.value, 10),
                 spreadRate: parseInt(this.grassSpread.value, 10),
+                spreadRadius: parseInt(this.grassSpreadRadius.value, 10),
             },
             sheep: {
                 lifeExpectancy: parseInt(this.sheepLifespan.value, 10),

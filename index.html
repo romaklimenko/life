@@ -35,8 +35,12 @@
               <input type="number" id="grass-initial" value="5000" min="0" max="65025" class="input" />
             </div>
             <div class="param-row">
-              <label for="grass-spread">Spread rate <span class="param-hint">1-in-N chance to spread each tick — lower is faster</span></label>
+              <label for="grass-spread">Spread rate <span class="param-hint">Percentage chance to spread each tick</span></label>
               <input type="number" id="grass-spread" value="5" min="1" max="100" class="input" />
+            </div>
+            <div class="param-row">
+              <label for="grass-spread-radius">Spread radius <span class="param-hint">How far grass can spread (in cells)</span></label>
+              <input type="number" id="grass-spread-radius" value="3" min="1" max="20" class="input" />
             </div>
           </fieldset>
 

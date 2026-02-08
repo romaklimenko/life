@@ -17,6 +17,7 @@ export const CONFIG_RANGES = {
         lifeExpectancy: { min: 1, max: 500 },
         initialCount: { min: 0, max: 50000 },
         spreadRate: { min: 1, max: 100 },
+        spreadRadius: { min: 1, max: 20 },
     },
     sheep: {
         lifeExpectancy: { min: 1, max: 500 },
@@ -109,6 +110,14 @@ export function validateGrassConfig(config: GrassConfig): string[] {
         'Grass spread rate'
     );
     if (spreadError) errors.push(spreadError);
+
+    const radiusError = validateRange(
+        config.spreadRadius,
+        ranges.spreadRadius.min,
+        ranges.spreadRadius.max,
+        'Grass spread radius'
+    );
+    if (radiusError) errors.push(radiusError);
 
     return errors;
 }
@@ -269,6 +278,7 @@ export function sanitizeConfig(config: SimulationConfig): SimulationConfig {
             lifeExpectancy: clamp(config.grass.lifeExpectancy, r.grass.lifeExpectancy.min, r.grass.lifeExpectancy.max),
             initialCount: clamp(config.grass.initialCount, r.grass.initialCount.min, r.grass.initialCount.max),
             spreadRate: clamp(config.grass.spreadRate, r.grass.spreadRate.min, r.grass.spreadRate.max),
+            spreadRadius: clamp(config.grass.spreadRadius, r.grass.spreadRadius.min, r.grass.spreadRadius.max),
         },
         sheep: {
             lifeExpectancy: clamp(config.sheep.lifeExpectancy, r.sheep.lifeExpectancy.min, r.sheep.lifeExpectancy.max),

@@ -379,6 +379,41 @@ export class Grid {
      * @param y - Center Y coordinate
      * @returns Random empty neighbor position or null if none available
      */
+    /**
+     * Gets a random empty cell within a given radius (Manhattan distance).
+     * Uses random sampling for efficiency.
+     * @param cx - Center X coordinate
+     * @param cy - Center Y coordinate
+     * @param radius - Search radius in cells (Manhattan distance)
+     * @returns Random empty position within radius, or null if none found
+     */
+    getRandomEmptyInRadius(cx: number, cy: number, radius: number): { x: number; y: number } | null {
+        // For radius 1, fall back to neighbor check for efficiency
+        if (radius <= 1) {
+            return this.getRandomEmptyNeighbor(cx, cy);
+        }
+
+        // Random sampling: try random positions within the diamond
+        const maxAttempts = radius * radius * 2;
+        for (let i = 0; i < maxAttempts; i++) {
+            // Generate random point within Manhattan distance
+            const dx = Math.floor(Math.random() * (2 * radius + 1)) - radius;
+            const maxDy = radius - Math.abs(dx);
+            const dy = Math.floor(Math.random() * (2 * maxDy + 1)) - maxDy;
+
+            if (dx === 0 && dy === 0) continue;
+
+            const nx = cx + dx;
+            const ny = cy + dy;
+
+            if (this.isValidPosition(nx, ny) && this.getType(nx, ny) === EntityType.EMPTY) {
+                return { x: nx, y: ny };
+            }
+        }
+
+        return null;
+    }
+
     getRandomEmptyNeighbor(x: number, y: number): { x: number; y: number } | null {
         const emptyNeighbors = this.getEmptyNeighbors(x, y);
 

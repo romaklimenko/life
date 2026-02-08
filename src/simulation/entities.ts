@@ -114,14 +114,14 @@ export function updateGrass(
         return { alive: false, spawn: null };
     }
 
-    // Attempt to spread to adjacent cell
+    // Attempt to spread to a cell within spread radius
     let spawn: GrassEntity | null = null;
 
     // Spread rate is a percentage chance per tick
     if (Math.random() * 100 < config.grass.spreadRate) {
-        const emptyNeighbor = grid.getRandomEmptyNeighbor(grass.x, grass.y);
-        if (emptyNeighbor) {
-            spawn = createGrass(emptyNeighbor.x, emptyNeighbor.y);
+        const emptyCell = grid.getRandomEmptyInRadius(grass.x, grass.y, config.grass.spreadRadius);
+        if (emptyCell) {
+            spawn = createGrass(emptyCell.x, emptyCell.y);
         }
     }
 

@@ -13,6 +13,7 @@ const testConfig: SimulationConfig = {
         lifeExpectancy: 50,
         initialCount: 100,
         spreadRate: 5,
+        spreadRadius: 3,
     },
     sheep: {
         lifeExpectancy: 100,

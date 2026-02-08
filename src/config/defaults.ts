@@ -17,9 +17,10 @@ import { SimulationConfig, GrassConfig, SheepConfig, WolfConfig } from '../types
  * lifeExpectancy affects how long individual grass patches persist.
  */
 export const DEFAULT_GRASS_CONFIG: GrassConfig = {
-    lifeExpectancy: 60,     // ~60 ticks before natural death
-    initialCount: 6000,     // ~36% of grid covered initially
-    spreadRate: 6,          // 1/6 chance to spread each tick
+    lifeExpectancy: 40,     // Short-lived grass forces constant regrowth
+    initialCount: 2000,     // ~12% of grid covered initially
+    spreadRate: 20,         // 20% chance to spread each tick
+    spreadRadius: 2,        // Spread up to 2 cells away (Manhattan distance)
 };
 
 /**
@@ -28,11 +29,11 @@ export const DEFAULT_GRASS_CONFIG: GrassConfig = {
  * Sheep ratio to wolves should be roughly 10:1 for stability.
  */
 export const DEFAULT_SHEEP_CONFIG: SheepConfig = {
-    lifeExpectancy: 120,    // Long natural lifespan if well-fed
-    initialCount: 400,      // ~8% of grid, 8:1 ratio to wolves
-    starvationTime: 25,     // Dies after 25 ticks without grass
-    breedThreshold: 4,      // Needs to eat 4 grass to reproduce
-    grazingRadius: 3,       // Detection range for grass
+    lifeExpectancy: 200,    // Long natural lifespan if well-fed
+    initialCount: 400,      // ~6:1 ratio to wolves
+    starvationTime: 10,     // Dies after 10 ticks without grass
+    breedThreshold: 8,      // Needs to eat 8 grass to reproduce
+    grazingRadius: 5,       // Detection range for grass
 };
 
 /**
@@ -41,11 +42,11 @@ export const DEFAULT_SHEEP_CONFIG: SheepConfig = {
  * Wolves need successful hunts to survive and breed.
  */
 export const DEFAULT_WOLF_CONFIG: WolfConfig = {
-    lifeExpectancy: 150,    // Longer lifespan than sheep
-    initialCount: 50,       // ~1% of grid, apex predator density
-    starvationTime: 35,     // Longer survival between meals
-    breedThreshold: 3,      // Needs to eat 3 sheep to reproduce
-    huntingRadius: 5,       // Detection range for prey
+    lifeExpectancy: 250,    // Longer lifespan than sheep
+    initialCount: 80,       // ~5:1 sheep-to-wolf ratio
+    starvationTime: 50,     // Long survival between meals
+    breedThreshold: 6,      // Needs to eat 6 sheep to reproduce
+    huntingRadius: 4,       // Detection range for prey
 };
 
 /**
@@ -103,6 +104,7 @@ export const PREDATOR_PARADISE_PRESET: Preset = {
             lifeExpectancy: 60,     // Longer-lived grass
             initialCount: 7000,     // More grass to support food chain
             spreadRate: 8,          // Faster regrowth
+            spreadRadius: 3,        // Spread range
         },
         sheep: {
             lifeExpectancy: 100,
@@ -136,6 +138,7 @@ export const PEACEFUL_MEADOW_PRESET: Preset = {
             lifeExpectancy: 80,     // Long-lived grass
             initialCount: 8000,     // Abundant food
             spreadRate: 10,         // Fast regrowth
+            spreadRadius: 4,        // Wide spread range
         },
         sheep: {
             lifeExpectancy: 150,
@@ -169,6 +172,7 @@ export const SURVIVAL_MODE_PRESET: Preset = {
             lifeExpectancy: 35,     // Short-lived grass
             initialCount: 3000,     // Less initial coverage
             spreadRate: 4,          // Slow regrowth
+            spreadRadius: 2,        // Limited spread range
         },
         sheep: {
             lifeExpectancy: 70,     // Shorter lifespan

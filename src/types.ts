@@ -92,6 +92,8 @@ export interface GrassConfig {
     initialCount: number;
     /** Percentage chance (1-100) for new grass to spread each tick */
     spreadRate: number;
+    /** How far grass can spread (in cells, Manhattan distance) */
+    spreadRadius: number;
 }
 
 /**
