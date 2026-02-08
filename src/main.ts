@@ -132,6 +132,9 @@ function handleStart(config: SimulationConfig): void {
         },
         // Reset
         () => {
+            if (controls) {
+                controls.reset();
+            }
             stopGameLoop();
             showScreen('start-screen');
         },
