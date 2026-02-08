@@ -37,9 +37,9 @@ export const COLOR_GRASS: RGBA = { r: 74, g: 222, b: 128, a: 255 };
 export const COLOR_SHEEP: RGBA = { r: 245, g: 245, b: 240, a: 255 };
 
 /**
- * Wolf color - medium gray.
+ * Wolf color - red.
  */
-export const COLOR_WOLF: RGBA = { r: 160, g: 160, b: 160, a: 255 };
+export const COLOR_WOLF: RGBA = { r: 220, g: 60, b: 60, a: 255 };
 
 /**
  * Entity color lookup array for fast access.
@@ -69,15 +69,15 @@ export const CSS_COLORS = {
     empty: 'rgb(15, 15, 25)',
     grass: 'rgb(74, 222, 128)',
     sheep: 'rgb(245, 245, 240)',
-    wolf: 'rgb(160, 160, 160)',
+    wolf: 'rgb(220, 60, 60)',
 
     // Chart line colors with transparency for stacking
     grassLine: 'rgba(74, 222, 128, 0.9)',
     sheepLine: 'rgba(245, 245, 240, 0.9)',
-    wolfLine: 'rgba(160, 160, 160, 0.9)',
+    wolfLine: 'rgba(220, 60, 60, 0.9)',
 
     // Fill colors for chart area
     grassFill: 'rgba(74, 222, 128, 0.2)',
     sheepFill: 'rgba(245, 245, 240, 0.2)',
-    wolfFill: 'rgba(160, 160, 160, 0.2)',
+    wolfFill: 'rgba(220, 60, 60, 0.2)',
 };
