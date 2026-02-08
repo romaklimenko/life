@@ -505,7 +505,7 @@ body {
 }
 
 .stat-wolf .stat-value {
-  color: var(--color-text-primary);
+  color: var(--color-wolf);
 }
 
 /* --- Chart --- */
