@@ -27,15 +27,15 @@
           <fieldset class="param-group glass">
             <legend class="param-legend">🌱 Grass</legend>
             <div class="param-row">
-              <label for="grass-lifespan">Life expectancy</label>
+              <label for="grass-lifespan">Life expectancy <span class="param-hint">Ticks before grass dies naturally</span></label>
               <input type="number" id="grass-lifespan" value="50" min="1" max="500" class="input" />
             </div>
             <div class="param-row">
-              <label for="grass-initial">Initial count</label>
-              <input type="number" id="grass-initial" value="5000" min="0" max="50000" class="input" />
+              <label for="grass-initial">Initial count <span class="param-hint">Grass patches at start (65.025 max)</span></label>
+              <input type="number" id="grass-initial" value="5000" min="0" max="65025" class="input" />
             </div>
             <div class="param-row">
-              <label for="grass-spread">Spread rate</label>
+              <label for="grass-spread">Spread rate <span class="param-hint">1-in-N chance to spread each tick — lower is faster</span></label>
               <input type="number" id="grass-spread" value="5" min="1" max="100" class="input" />
             </div>
           </fieldset>
@@ -44,19 +44,19 @@
           <fieldset class="param-group glass">
             <legend class="param-legend">🐑 Sheep</legend>
             <div class="param-row">
-              <label for="sheep-lifespan">Life expectancy</label>
+              <label for="sheep-lifespan">Life expectancy <span class="param-hint">Ticks before a sheep dies of old age</span></label>
               <input type="number" id="sheep-lifespan" value="100" min="1" max="500" class="input" />
             </div>
             <div class="param-row">
-              <label for="sheep-initial">Initial count</label>
+              <label for="sheep-initial">Initial count <span class="param-hint">Sheep placed on the grid at start</span></label>
               <input type="number" id="sheep-initial" value="500" min="0" max="5000" class="input" />
             </div>
             <div class="param-row">
-              <label for="sheep-starvation">Starvation time</label>
+              <label for="sheep-starvation">Starvation time <span class="param-hint">Ticks without eating grass before dying</span></label>
               <input type="number" id="sheep-starvation" value="20" min="1" max="100" class="input" />
             </div>
             <div class="param-row">
-              <label for="sheep-breed">Breed threshold</label>
+              <label for="sheep-breed">Breed threshold <span class="param-hint">Grass eaten before reproducing</span></label>
               <input type="number" id="sheep-breed" value="3" min="1" max="20" class="input" />
             </div>
           </fieldset>
@@ -65,23 +65,23 @@
           <fieldset class="param-group glass">
             <legend class="param-legend">🐺 Wolves</legend>
             <div class="param-row">
-              <label for="wolf-lifespan">Life expectancy</label>
+              <label for="wolf-lifespan">Life expectancy <span class="param-hint">Ticks before a wolf dies of old age</span></label>
               <input type="number" id="wolf-lifespan" value="150" min="1" max="500" class="input" />
             </div>
             <div class="param-row">
-              <label for="wolf-initial">Initial count</label>
+              <label for="wolf-initial">Initial count <span class="param-hint">Wolves placed on the grid at start</span></label>
               <input type="number" id="wolf-initial" value="50" min="0" max="1000" class="input" />
             </div>
             <div class="param-row">
-              <label for="wolf-starvation">Starvation time</label>
+              <label for="wolf-starvation">Starvation time <span class="param-hint">Ticks without eating sheep before dying</span></label>
               <input type="number" id="wolf-starvation" value="30" min="1" max="100" class="input" />
             </div>
             <div class="param-row">
-              <label for="wolf-breed">Breed threshold</label>
+              <label for="wolf-breed">Breed threshold <span class="param-hint">Sheep eaten before reproducing</span></label>
               <input type="number" id="wolf-breed" value="2" min="1" max="10" class="input" />
             </div>
             <div class="param-row">
-              <label for="wolf-hunting">Hunting radius</label>
+              <label for="wolf-hunting">Hunting radius <span class="param-hint">How many cells away a wolf can detect prey</span></label>
               <input type="number" id="wolf-hunting" value="5" min="1" max="20" class="input" />
             </div>
           </fieldset>
