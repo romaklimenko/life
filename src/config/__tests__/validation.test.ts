@@ -95,7 +95,7 @@ describe('validateConfig', () => {
     it('should collect multiple errors', () => {
         const badConfig = {
             grass: { lifeExpectancy: 0, initialCount: -1, spreadRate: 200 },
-            sheep: { lifeExpectancy: 0, initialCount: -1, starvationTime: 0, breedThreshold: 0 },
+            sheep: { lifeExpectancy: 0, initialCount: -1, starvationTime: 0, breedThreshold: 0, grazingRadius: 0 },
             wolf: { lifeExpectancy: 0, initialCount: -1, starvationTime: 0, breedThreshold: 0, huntingRadius: 0 },
             gameSpeed: 0,
         };
@@ -115,7 +115,7 @@ describe('sanitizeConfig', () => {
     it('should clamp values to valid ranges', () => {
         const badConfig = {
             grass: { lifeExpectancy: 0, initialCount: 100000, spreadRate: 200 },
-            sheep: { lifeExpectancy: 1000, initialCount: -100, starvationTime: 0, breedThreshold: 100 },
+            sheep: { lifeExpectancy: 1000, initialCount: -100, starvationTime: 0, breedThreshold: 100, grazingRadius: 100 },
             wolf: { lifeExpectancy: 0, initialCount: 5000, starvationTime: 200, breedThreshold: 50, huntingRadius: 100 },
             gameSpeed: 1000,
         };

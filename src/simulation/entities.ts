@@ -196,7 +196,7 @@ export function updateSheep(
     const oldX = sheep.x;
     const oldY = sheep.y;
 
-    // Priority: move to grass if hungry, otherwise move randomly
+    // Priority: eat adjacent grass > move toward detected grass > wander randomly
     if (grassNeighbors.length > 0) {
         // Move to a grass cell
         const target = grassNeighbors[Math.floor(Math.random() * grassNeighbors.length)];
@@ -221,11 +221,52 @@ export function updateSheep(
                 spawn = createSheep(spawnPos.x, spawnPos.y);
             }
         }
-    } else if (emptyNeighbors.length > 0) {
-        // Move to random empty cell
-        const target = emptyNeighbors[Math.floor(Math.random() * emptyNeighbors.length)];
-        sheep.x = target.x;
-        sheep.y = target.y;
+    } else {
+        // No adjacent grass — look for grass within grazing radius
+        const closestGrass = grid.findClosestInRadius<GrassEntity>(
+            sheep.x, sheep.y,
+            config.sheep.grazingRadius,
+            EntityType.GRASS
+        );
+
+        if (closestGrass) {
+            // Move one step toward the detected grass
+            const dx = Math.sign(closestGrass.entity.x - sheep.x);
+            const dy = Math.sign(closestGrass.entity.y - sheep.y);
+            const newX = sheep.x + dx;
+            const newY = sheep.y + dy;
+
+            if (grid.isValidPosition(newX, newY)) {
+                const targetType = grid.getType(newX, newY);
+                if (targetType === EntityType.GRASS) {
+                    // Reached grass — eat it
+                    sheep.x = newX;
+                    sheep.y = newY;
+                    ateGrassAt = { x: newX, y: newY };
+                    sheep.foodEaten++;
+                    sheep.ticksSinceLastMeal = 0;
+
+                    if (sheep.foodEaten >= config.sheep.breedThreshold) {
+                        sheep.foodEaten = 0;
+                        const spawnPos = grid.getType(oldX, oldY) === EntityType.EMPTY
+                            ? { x: oldX, y: oldY }
+                            : grid.getRandomEmptyNeighbor(sheep.x, sheep.y);
+                        if (spawnPos) {
+                            spawn = createSheep(spawnPos.x, spawnPos.y);
+                        }
+                    }
+                } else if (targetType === EntityType.EMPTY) {
+                    // Move toward grass
+                    sheep.x = newX;
+                    sheep.y = newY;
+                }
+            }
+        } else if (emptyNeighbors.length > 0) {
+            // No grass detected at all — wander randomly
+            const target = emptyNeighbors[Math.floor(Math.random() * emptyNeighbors.length)];
+            sheep.x = target.x;
+            sheep.y = target.y;
+        }
     }
     // If no valid moves, sheep stays in place
 

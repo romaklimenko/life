@@ -32,6 +32,7 @@ export const DEFAULT_SHEEP_CONFIG: SheepConfig = {
     initialCount: 400,      // ~8% of grid, 8:1 ratio to wolves
     starvationTime: 25,     // Dies after 25 ticks without grass
     breedThreshold: 4,      // Needs to eat 4 grass to reproduce
+    grazingRadius: 3,       // Detection range for grass
 };
 
 /**
@@ -108,6 +109,7 @@ export const PREDATOR_PARADISE_PRESET: Preset = {
             initialCount: 600,      // More sheep to feed wolves
             starvationTime: 25,     // More resilient
             breedThreshold: 4,      // Faster breeding to survive predation
+            grazingRadius: 3,       // Detection range for grass
         },
         wolf: {
             lifeExpectancy: 180,
@@ -140,6 +142,7 @@ export const PEACEFUL_MEADOW_PRESET: Preset = {
             initialCount: 800,      // Lots of prey
             starvationTime: 40,     // Rarely starve
             breedThreshold: 3,      // Fast breeding
+            grazingRadius: 4,       // Good foraging range
         },
         wolf: {
             lifeExpectancy: 200,
@@ -172,6 +175,7 @@ export const SURVIVAL_MODE_PRESET: Preset = {
             initialCount: 250,      // Fewer sheep
             starvationTime: 15,     // Quick starvation
             breedThreshold: 5,      // Hard to reproduce
+            grazingRadius: 2,       // Poor foraging in harsh conditions
         },
         wolf: {
             lifeExpectancy: 100,

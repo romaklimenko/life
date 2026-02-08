@@ -19,6 +19,7 @@ const testConfig: SimulationConfig = {
         initialCount: 20,
         starvationTime: 20,
         breedThreshold: 3,
+        grazingRadius: 3,
     },
     wolf: {
         lifeExpectancy: 150,

@@ -23,6 +23,7 @@ export const CONFIG_RANGES = {
         initialCount: { min: 0, max: 5000 },
         starvationTime: { min: 1, max: 100 },
         breedThreshold: { min: 1, max: 20 },
+        grazingRadius: { min: 1, max: 20 },
     },
     wolf: {
         lifeExpectancy: { min: 1, max: 500 },
@@ -153,6 +154,14 @@ export function validateSheepConfig(config: SheepConfig): string[] {
     );
     if (breedError) errors.push(breedError);
 
+    const grazingError = validateRange(
+        config.grazingRadius,
+        ranges.grazingRadius.min,
+        ranges.grazingRadius.max,
+        'Sheep grazing radius'
+    );
+    if (grazingError) errors.push(grazingError);
+
     return errors;
 }
 
@@ -266,6 +275,7 @@ export function sanitizeConfig(config: SimulationConfig): SimulationConfig {
             initialCount: clamp(config.sheep.initialCount, r.sheep.initialCount.min, r.sheep.initialCount.max),
             starvationTime: clamp(config.sheep.starvationTime, r.sheep.starvationTime.min, r.sheep.starvationTime.max),
             breedThreshold: clamp(config.sheep.breedThreshold, r.sheep.breedThreshold.min, r.sheep.breedThreshold.max),
+            grazingRadius: clamp(config.sheep.grazingRadius, r.sheep.grazingRadius.min, r.sheep.grazingRadius.max),
         },
         wolf: {
             lifeExpectancy: clamp(config.wolf.lifeExpectancy, r.wolf.lifeExpectancy.min, r.wolf.lifeExpectancy.max),

@@ -44,6 +44,7 @@ export class StartScreenController {
     private sheepInitial: HTMLInputElement;
     private sheepStarvation: HTMLInputElement;
     private sheepBreed: HTMLInputElement;
+    private sheepGrazing: HTMLInputElement;
     private wolfLifespan: HTMLInputElement;
     private wolfInitial: HTMLInputElement;
     private wolfStarvation: HTMLInputElement;
@@ -71,6 +72,7 @@ export class StartScreenController {
         this.sheepInitial = getElement<HTMLInputElement>('sheep-initial');
         this.sheepStarvation = getElement<HTMLInputElement>('sheep-starvation');
         this.sheepBreed = getElement<HTMLInputElement>('sheep-breed');
+        this.sheepGrazing = getElement<HTMLInputElement>('sheep-grazing');
         this.wolfLifespan = getElement<HTMLInputElement>('wolf-lifespan');
         this.wolfInitial = getElement<HTMLInputElement>('wolf-initial');
         this.wolfStarvation = getElement<HTMLInputElement>('wolf-starvation');
@@ -124,6 +126,7 @@ export class StartScreenController {
         this.sheepInitial.value = config.sheep.initialCount.toString();
         this.sheepStarvation.value = config.sheep.starvationTime.toString();
         this.sheepBreed.value = config.sheep.breedThreshold.toString();
+        this.sheepGrazing.value = config.sheep.grazingRadius.toString();
         this.wolfLifespan.value = config.wolf.lifeExpectancy.toString();
         this.wolfInitial.value = config.wolf.initialCount.toString();
         this.wolfStarvation.value = config.wolf.starvationTime.toString();
@@ -148,6 +151,7 @@ export class StartScreenController {
                 initialCount: parseInt(this.sheepInitial.value, 10),
                 starvationTime: parseInt(this.sheepStarvation.value, 10),
                 breedThreshold: parseInt(this.sheepBreed.value, 10),
+                grazingRadius: parseInt(this.sheepGrazing.value, 10),
             },
             wolf: {
                 lifeExpectancy: parseInt(this.wolfLifespan.value, 10),

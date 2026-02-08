@@ -106,6 +106,8 @@ export interface SheepConfig {
     starvationTime: number;
     /** Number of grass needed to eat before breeding */
     breedThreshold: number;
+    /** Detection radius for finding grass (in cells) */
+    grazingRadius: number;
 }
 
 /**
