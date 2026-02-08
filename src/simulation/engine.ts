@@ -23,9 +23,6 @@ import {
     seedPopulation,
 } from './entities';
 
-/** Maximum history points to keep for charting */
-const MAX_HISTORY_LENGTH = 500;
-
 /** How often to record history (every N ticks) */
 const HISTORY_INTERVAL = 1;
 
@@ -360,11 +357,6 @@ export class SimulationEngine {
         };
 
         this.state.history.push(dataPoint);
-
-        // Trim history if too long
-        if (this.state.history.length > MAX_HISTORY_LENGTH) {
-            this.state.history.shift();
-        }
     }
 
     /**
