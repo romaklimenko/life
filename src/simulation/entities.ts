@@ -87,6 +87,20 @@ export interface GrassUpdateResult {
 }
 
 /**
+ * Probabilistic old age death check.
+ * Starting at 80% of life expectancy, the chance of dying increases linearly,
+ * reaching 100% at 120% of life expectancy.
+ */
+function shouldDieOfOldAge(age: number, lifeExpectancy: number): boolean {
+    const minAge = lifeExpectancy * 0.8;
+    if (age < minAge) return false;
+    const maxAge = lifeExpectancy * 1.2;
+    if (age >= maxAge) return true;
+    const chance = (age - minAge) / (maxAge - minAge);
+    return Math.random() < chance;
+}
+
+/**
  * Updates a grass entity for one tick.
  * 
  * Grass behavior:
@@ -107,8 +121,8 @@ export function updateGrass(
     // Age the grass
     grass.age++;
 
-    // Check for death by old age
-    if (grass.age >= config.grass.lifeExpectancy) {
+    // Check for death by old age (probabilistic around life expectancy)
+    if (shouldDieOfOldAge(grass.age, config.grass.lifeExpectancy)) {
         return { alive: false, spawn: null };
     }
 
@@ -166,8 +180,8 @@ export function updateSheep(
     sheep.age++;
     sheep.ticksSinceLastMeal++;
 
-    // Check for death by old age
-    if (sheep.age >= config.sheep.lifeExpectancy) {
+    // Check for death by old age (probabilistic around life expectancy)
+    if (shouldDieOfOldAge(sheep.age, config.sheep.lifeExpectancy)) {
         return { alive: false, spawn: null, ateGrassAt: null };
     }
 
@@ -311,8 +325,8 @@ export function updateWolf(
     wolf.age++;
     wolf.ticksSinceLastMeal++;
 
-    // Check for death by old age
-    if (wolf.age >= config.wolf.lifeExpectancy) {
+    // Check for death by old age (probabilistic around life expectancy)
+    if (shouldDieOfOldAge(wolf.age, config.wolf.lifeExpectancy)) {
         return { alive: false, spawn: null, ateSheepAt: null };
     }
 
